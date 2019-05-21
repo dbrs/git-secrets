@@ -1,0 +1,1 @@
+GET-WMIOBJECT -query "SELECT * from win32_logicaldisk where DriveType = '3'"  | ForEach-Object -Process {"Hello"}
