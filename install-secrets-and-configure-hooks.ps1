@@ -1,2 +1,2 @@
-.\install.ps1
+.\install-secrets.ps1
 .\configure-hooks.ps1
