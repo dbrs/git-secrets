@@ -9,6 +9,9 @@ if (Test-Path $InstallationDirectory)
     Remove-Item -Path "$InstallationDirectory\git-secrets.1" -ErrorAction Ignore
 
     Remove-Item -Path $Env:USERPROFILE\.git-templates\git-secrets -Recurse -ErrorAction Ignore
+    
+    Write-Host "Unsetting git init.templatedir."
+    git config --global --unset-all init.templatedir
 
     Write-Host "Done."
 }
