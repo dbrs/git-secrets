@@ -9,7 +9,7 @@ GET-WMIOBJECT -query "SELECT * from win32_logicaldisk where DriveType = '3'" | F
         Set-Location -Path $repoDir
         
         Write-Output "Installing hook in repo: $repoDir"
-        git secrets --install -f
+        git secrets --install
         git secrets --register-aws
     }
 }
