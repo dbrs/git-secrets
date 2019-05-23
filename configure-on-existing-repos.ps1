@@ -16,7 +16,7 @@ GET-WMIOBJECT -query "SELECT * from win32_logicaldisk where DriveType = '3'" | F
 
 # Also install for redirected folders
 [Environment+SpecialFolder]::GetNames([Environment+SpecialFolder]) | ForEach-Object {
-    [Environment]::GetFolderPath($_) | Select-String -Pattern '^(?![C:|D:].+$).*' | Select-String -Pattern '.+' | ForEach-Object {
+    [Environment]::GetFolderPath($_) | Select-String -Pattern '^(?!.:.+$).*' | Select-String -Pattern '.+' | ForEach-Object {
         Write-Host "Scanning Folder: " + $_
 
         $folder=$_
