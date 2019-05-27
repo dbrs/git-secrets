@@ -58,7 +58,7 @@ the directory to the current user ``PATH``.
 
 ::
 
-    PS > ./install.ps1
+    PS > ./install-and-hook.ps1
 
 Homebrew (for macOS users)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
