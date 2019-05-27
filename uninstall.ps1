@@ -10,10 +10,11 @@ if (Test-Path $InstallationDirectory)
 
     Remove-Item -Path $Env:USERPROFILE\.git-templates\git-secrets -Recurse -ErrorAction Ignore
     
-    Write-Host "Unsetting git init.templatedir."
+    Write-Host "Unsetting git init.templatedir and secrets config"
     git config --global --unset-all init.templatedir
-
-    Write-Host "Done."
+    git config --global --unset-all secrets.providers
+    git config --global --unset-all secrets.patterns
+    git config --global --unset-all secrets.allowed
 }
 else
 {
