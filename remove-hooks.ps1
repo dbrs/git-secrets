@@ -3,36 +3,36 @@ Function Clean-Location {
         [Parameter(Mandatory=$True)]
         [string]$location
     )
-    Begin {
-        Write-Host "Scanning Location: $location"
-        Get-ChildItem -Path $location\ -Filter .git -Recurse -ErrorAction SilentlyContinue -Force | Select-Object @{ n = 'Folder'; e = { Convert-Path $_.PSParentPath } } | ForEach-Object {
-            $repoDir=$_.Folder
-            
-            Write-Host -NoNewline "Removing hooks from repo: $repoDir"
-            $hooksRemoved = 0
-            if (Test-Path "$repoDir\.git\hooks\commit-msg"){
-                Remove-Item -Path "$repoDir\.git\hooks\commit-msg"
-                Write-Host -NoNewline "."
-                $hooksRemoved += 1
-            }
-            if (Test-Path "$repoDir\.git\hooks\pre-commit"){
-                Remove-Item -Path "$repoDir\.git\hooks\pre-commit"
-                Write-Host -NoNewline "."
-                $hooksRemoved += 1
-            }
-            if (Test-Path "$repoDir\.git\hooks\prepare-commit-msg"){
-                Remove-Item -Path "$repoDir\.git\hooks\prepare-commit-msg"
-                Write-Host -NoNewline "."
-                $hooksRemoved += 1
-            }
-            if ($hooksRemoved -eq 0){
-                Write-Host " - No hooks found"
-            } else {
-                Write-Host "Done. $hooksRemoved hooks removed."
-            }
+
+    Write-Host "Scanning Location: $location"
+    Get-ChildItem -Path $location\ -Filter .git -Recurse -ErrorAction SilentlyContinue -Force | Select-Object @{ n = 'Folder'; e = { Convert-Path $_.PSParentPath } } | ForEach-Object {
+        $repoDir=$_.Folder
+        
+        Write-Host -NoNewline "Removing hooks from repo: $repoDir"
+        $hooksRemoved = 0
+        if (Test-Path "$repoDir\.git\hooks\commit-msg"){
+            Remove-Item -Path "$repoDir\.git\hooks\commit-msg"
+            Write-Host -NoNewline "."
+            $hooksRemoved += 1
         }
-        Write-Output "----------"
+        if (Test-Path "$repoDir\.git\hooks\pre-commit"){
+            Remove-Item -Path "$repoDir\.git\hooks\pre-commit"
+            Write-Host -NoNewline "."
+            $hooksRemoved += 1
+        }
+        if (Test-Path "$repoDir\.git\hooks\prepare-commit-msg"){
+            Remove-Item -Path "$repoDir\.git\hooks\prepare-commit-msg"
+            Write-Host -NoNewline "."
+            $hooksRemoved += 1
+        }
+        if ($hooksRemoved -eq 0){
+            Write-Host " - No hooks found"
+        } else {
+            Write-Host "Done. $hooksRemoved hooks removed."
+        }
     }
+    Write-Output "----------"
+
 }
 
 
