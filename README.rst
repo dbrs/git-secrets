@@ -58,7 +58,7 @@ the directory to the current user ``PATH``.
 
 ::
 
-    PS > ./install.ps1
+    PS > ./install-and-hook.ps1
 
 Homebrew (for macOS users)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -86,17 +86,30 @@ Advanced configuration
 Add a configuration template if you want to add hooks to all repositories you
 initialize or clone in the future.
 
-::
-
-    git secrets --register-aws --global
 
 
-Add hooks to all your local repositories.
+\*nix (Linux/macOS)
+~~~~~~~~~~~~~~~~~~~
 
 ::
 
     git secrets --install ~/.git-templates/git-secrets
-    git config --global init.templateDir ~/.git-templates/git-secrets
+    git secrets --register-aws --global
+
+    # Add hooks to all your local repositories.
+    git config --global init.templateDir ~/.git-templates/git-secrets 
+
+
+Windows
+~~~~~~~
+
+::
+
+    git secrets --install $env:USERPROFILE/.git-templates/git-secrets
+    git secrets --register-aws --global
+
+    # Add hooks to all your local repositories.
+    git config --global init.templateDir $env:USERPROFILE/.git-templates/git-secrets  
 
 
 Add custom providers to scan for security credentials.
@@ -540,4 +553,4 @@ About
 - Special thanks to Adrian Vatchinsky and Ari Juels of Cornell University for
   providing suggestions and feedback.
 
-Copyright 2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright 2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.~~   
